@@ -27,6 +27,7 @@ import javax.xml.xpath.XPathFactory;
 import org.jboss.logging.Logger;
 import org.keycloak.broker.provider.AbstractIdentityProviderMapper;
 import org.keycloak.broker.provider.BrokeredIdentityContext;
+import org.keycloak.broker.saml.EidasSAMLIdentityProviderFactory;
 import org.keycloak.broker.saml.SAMLEndpoint;
 import org.keycloak.broker.saml.SAMLIdentityProviderFactory;
 import org.keycloak.dom.saml.v2.assertion.AssertionType;
@@ -48,7 +49,10 @@ import org.w3c.dom.Document;
 
 public class XPathAttributeMapper extends AbstractIdentityProviderMapper implements SamlMetadataDescriptorUpdater {
 
-    public static final String[] COMPATIBLE_PROVIDERS = {SAMLIdentityProviderFactory.PROVIDER_ID};
+    public static final String[] COMPATIBLE_PROVIDERS = {
+        SAMLIdentityProviderFactory.PROVIDER_ID,
+        EidasSAMLIdentityProviderFactory.PROVIDER_ID
+    };
 
     private static final Logger LOGGER = Logger.getLogger(XPathAttributeMapper.class);
 

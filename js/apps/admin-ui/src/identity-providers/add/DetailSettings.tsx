@@ -59,6 +59,7 @@ import { OIDCAuthentication } from "./OIDCAuthentication";
 import { OIDCGeneralSettings } from "./OIDCGeneralSettings";
 import { ReqAuthnConstraints } from "./ReqAuthnConstraintsSettings";
 import { SamlGeneralSettings } from "./SamlGeneralSettings";
+import { SamlEidasSettings } from "./SamlEidasSettings";
 
 type HeaderProps = {
   onChange: (value: boolean) => void;
@@ -301,6 +302,7 @@ export default function DetailSettings() {
 
   const isOIDC = provider.providerId!.includes("oidc");
   const isSAML = provider.providerId!.includes("saml");
+  const isEidasSAML = provider.providerId!.includes("eidas-saml");
 
   const loader = async () => {
     const [loaderMappers, loaderMapperTypes] = await Promise.all([
@@ -336,7 +338,7 @@ export default function DetailSettings() {
           isHorizontal
           onSubmit={handleSubmit(save)}
         >
-          {!isOIDC && !isSAML && (
+          {!isOIDC && !isSAML && !isEidasSAML &&(
             <>
               <GeneralSettings create={false} id={alias} />
               {providerInfo && (
@@ -348,7 +350,7 @@ export default function DetailSettings() {
             </>
           )}
           {isOIDC && <OIDCGeneralSettings />}
-          {isSAML && <SamlGeneralSettings isAliasReadonly />}
+          {(isSAML || isEidasSAML) && <SamlGeneralSettings isAliasReadonly />}
         </FormAccess>
       ),
     },
@@ -368,12 +370,25 @@ export default function DetailSettings() {
     },
     {
       title: t("samlSettings"),
-      isHidden: !isSAML,
-      panel: <DescriptorSettings readOnly={false} />,
+      isHidden: !isSAML && !isEidasSAML,
+      panel: <DescriptorSettings readOnly={false} />
+    },
+    {
+      title: t("eidasSamlSettings"),
+      isHidden: !isEidasSAML,
+      panel: (
+        <FormAccess
+          role="manage-identity-providers"
+          isHorizontal
+          onSubmit={handleSubmit(save)}
+        >
+          <SamlEidasSettings />
+        </FormAccess>
+      ),
     },
     {
       title: t("reqAuthnConstraints"),
-      isHidden: !isSAML,
+      isHidden: !isSAML && !isEidasSAML,
       panel: (
         <FormAccess
           role="manage-identity-providers"
@@ -392,7 +407,7 @@ export default function DetailSettings() {
           isHorizontal
           onSubmit={handleSubmit(save)}
         >
-          <AdvancedSettings isOIDC={isOIDC!} isSAML={isSAML!} />
+          <AdvancedSettings isOIDC={isOIDC!} isSAML={isSAML!} isEidasSAML={isEidasSAML!} />
 
           <FixedButtonsGroup name="idp-details" isSubmit reset={reset} />
         </FormAccess>

@@ -17,7 +17,7 @@
 
 package org.keycloak.protocol.saml;
 
-
+import org.jboss.logging.Logger;
 
 import org.apache.xml.security.encryption.EncryptedData;
 import org.apache.xml.security.encryption.EncryptedKey;
@@ -71,6 +71,8 @@ import java.util.stream.Stream;
  *
  */
 public class SAMLDecryptionKeysLocator implements XMLEncryptionUtil.DecryptionKeyLocator {
+
+    protected static final Logger logger = Logger.getLogger(SAMLDecryptionKeysLocator.class);
 
     private final KeycloakSession session;
     private final RealmModel realm;

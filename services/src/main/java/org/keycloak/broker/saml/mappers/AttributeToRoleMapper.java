@@ -19,6 +19,7 @@ package org.keycloak.broker.saml.mappers;
 
 import org.keycloak.broker.provider.BrokeredIdentityContext;
 import org.keycloak.broker.provider.ConfigConstants;
+import org.keycloak.broker.saml.EidasSAMLIdentityProviderFactory;
 import org.keycloak.broker.saml.SAMLEndpoint;
 import org.keycloak.broker.saml.SAMLIdentityProviderFactory;
 import org.keycloak.dom.saml.v2.assertion.AssertionType;
@@ -47,7 +48,10 @@ import static org.keycloak.saml.common.constants.JBossSAMLURIConstants.ATTRIBUTE
  */
 public class AttributeToRoleMapper extends AbstractAttributeToRoleMapper implements SamlMetadataDescriptorUpdater {
 
-    public static final String[] COMPATIBLE_PROVIDERS = {SAMLIdentityProviderFactory.PROVIDER_ID};
+    public static final String[] COMPATIBLE_PROVIDERS = {
+        SAMLIdentityProviderFactory.PROVIDER_ID,
+        EidasSAMLIdentityProviderFactory.PROVIDER_ID
+    };
 
     private static final List<ProviderConfigProperty> configProperties = new ArrayList<ProviderConfigProperty>();
 

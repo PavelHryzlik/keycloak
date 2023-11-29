@@ -30,6 +30,7 @@ org.keycloak.broker.saml.mappers.AdvancedAttributeToRoleMapper
 org.keycloak.broker.saml.mappers.AdvancedAttributeToGroupMapper
 org.keycloak.broker.saml.mappers.AttributeToRoleMapper
 org.keycloak.broker.saml.mappers.UserAttributeMapper
+org.keycloak.broker.saml.mappers.EidasUserAttributeMapper
 org.keycloak.broker.saml.mappers.XPathAttributeMapper
 org.keycloak.broker.saml.mappers.UsernameTemplateMapper
 org.keycloak.social.facebook.FacebookUserAttributeMapper

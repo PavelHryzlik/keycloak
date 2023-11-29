@@ -19,6 +19,7 @@ package org.keycloak.broker.saml.mappers;
 
 import org.keycloak.broker.provider.BrokeredIdentityContext;
 import org.keycloak.broker.provider.ConfigConstants;
+import org.keycloak.broker.saml.EidasSAMLIdentityProviderFactory;
 import org.keycloak.broker.saml.SAMLEndpoint;
 import org.keycloak.broker.saml.SAMLIdentityProviderFactory;
 import org.keycloak.dom.saml.v2.assertion.AssertionType;
@@ -50,7 +51,8 @@ public class AdvancedAttributeToRoleMapper extends AbstractAttributeToRoleMapper
     private static final Set<IdentityProviderSyncMode> IDENTITY_PROVIDER_SYNC_MODES = new HashSet<>(Arrays.asList(IdentityProviderSyncMode.values()));
 
     public static final String[] COMPATIBLE_PROVIDERS = {
-            SAMLIdentityProviderFactory.PROVIDER_ID
+        SAMLIdentityProviderFactory.PROVIDER_ID,
+        EidasSAMLIdentityProviderFactory.PROVIDER_ID
     };
 
     private static final List<ProviderConfigProperty> configProperties =

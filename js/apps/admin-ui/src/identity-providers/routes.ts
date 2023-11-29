@@ -3,6 +3,7 @@ import { IdentityProviderRoute } from "./routes/IdentityProvider";
 import { IdentityProviderKeycloakOidcRoute } from "./routes/IdentityProviderKeycloakOidc";
 import { IdentityProviderOidcRoute } from "./routes/IdentityProviderOidc";
 import { IdentityProviderSamlRoute } from "./routes/IdentityProviderSaml";
+import { IdentityProviderEidasSamlRoute } from "./routes/IdentityProviderEidasSaml";
 import { IdentityProvidersRoute } from "./routes/IdentityProviders";
 import { IdentityProviderAddMapperRoute } from "./routes/AddMapper";
 import { IdentityProviderEditMapperRoute } from "./routes/EditMapper";
@@ -14,6 +15,7 @@ const routes: AppRouteObject[] = [
   IdentityProvidersRoute,
   IdentityProviderOidcRoute,
   IdentityProviderSamlRoute,
+  IdentityProviderEidasSamlRoute,
   IdentityProviderKeycloakOidcRoute,
   IdentityProviderCreateRoute,
   IdentityProviderRoute,

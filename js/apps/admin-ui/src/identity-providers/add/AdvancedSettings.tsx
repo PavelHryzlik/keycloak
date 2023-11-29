@@ -90,9 +90,9 @@ const LoginFlow = ({
 };
 
 const syncModes = ["import", "legacy", "force"];
-type AdvancedSettingsProps = { isOIDC: boolean; isSAML: boolean };
+type AdvancedSettingsProps = { isOIDC: boolean; isSAML: boolean;  isEidasSAML: boolean};
 
-export const AdvancedSettings = ({ isOIDC, isSAML }: AdvancedSettingsProps) => {
+export const AdvancedSettings = ({ isOIDC, isSAML, isEidasSAML }: AdvancedSettingsProps) => {
   const { t } = useTranslation();
   const {
     control,
@@ -117,18 +117,18 @@ export const AdvancedSettings = ({ isOIDC, isSAML }: AdvancedSettingsProps) => {
   const syncModeAvailable = transientUsers === "false";
   return (
     <>
-      {!isOIDC && !isSAML && (
+      {!isOIDC && !isSAML && !isEidasSAML && (
         <TextField field="config.defaultScope" label="scopes" />
       )}
       <SwitchField field="storeToken" label="storeTokens" fieldType="boolean" />
-      {(isSAML || isOIDC) && (
+      {(isSAML || isEidasSAML || isOIDC) && (
         <SwitchField
           field="addReadTokenRoleOnCreate"
           label="storedTokensReadable"
           fieldType="boolean"
         />
       )}
-      {!isOIDC && !isSAML && (
+      {!isOIDC && !isSAML && !isEidasSAML && (
         <>
           <SwitchField
             field="config.acceptsPromptNoneForwardFromClient"
@@ -148,7 +148,7 @@ export const AdvancedSettings = ({ isOIDC, isSAML }: AdvancedSettingsProps) => {
       />
       <SwitchField field="config.hideOnLoginPage" label="hideOnLoginPage" />
 
-      {(!isSAML || isOIDC) && (
+      {(!isSAML || !isEidasSAML || isOIDC) && (
         <FormGroupField label="filteredByClaim">
           <Controller
             name="config.filteredByClaim"
@@ -168,7 +168,7 @@ export const AdvancedSettings = ({ isOIDC, isSAML }: AdvancedSettingsProps) => {
           />
         </FormGroupField>
       )}
-      {(!isSAML || isOIDC) && claimFilterRequired && (
+      {(!isSAML || !isEidasSAML || isOIDC) && claimFilterRequired && (
         <>
           <FormGroup
             label={t("claimFilterName")}

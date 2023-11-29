@@ -22,7 +22,6 @@ import org.apache.xml.security.encryption.XMLCipher;
 import org.apache.xml.security.encryption.XMLEncryptionException;
 import org.apache.xml.security.exceptions.XMLSecurityException;
 import org.apache.xml.security.utils.EncryptionConstants;
-
 import org.keycloak.saml.common.PicketLinkLogger;
 import org.keycloak.saml.common.PicketLinkLoggerFactory;
 import org.keycloak.saml.common.exceptions.ProcessingException;
@@ -265,6 +264,7 @@ public class XMLEncryptionUtil {
             }
 
             encryptedKey = encryptedData.getKeyInfo().itemEncryptedKey(0);
+            
             if (encryptedKey == null) {
                 // the encrypted key is not inside the encrypted data, locate it
                 Element encKeyElement = locateEncryptedKeyElement(encDataElement);
